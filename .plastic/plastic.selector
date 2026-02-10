@@ -1,0 +1,4 @@
+repository "Slime_Wave.io/Slime_Wave.io@14569440717632@cloud"
+  path "/"
+    br "/main"
+    co "/main"
