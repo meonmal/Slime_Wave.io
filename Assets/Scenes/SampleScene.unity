@@ -500,6 +500,62 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!1 &1955891979
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1955891980}
+  - component: {fileID: 1955891981}
+  m_Layer: 0
+  m_Name: AreaSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1955891980
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1955891979}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1955891981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1955891979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5f52c44946924f4ebe01669a46fae76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  areaPrefabs:
+  - {fileID: 1547322621252163828, guid: 0ef29847eca526148883c7ba12e850f3, type: 3}
+  - {fileID: 914332449868845341, guid: 05e1b5067b15199449695682a597b3ac, type: 3}
+  - {fileID: 8262846043833642783, guid: 901413f57025ac24f91e41234d4520cd, type: 3}
+  - {fileID: 6004196106101138825, guid: 394b48751d325c64781f2804c0b110e1, type: 3}
+  - {fileID: 8895242609163920248, guid: 9d8da5b2545711642866a2aa16b76c91, type: 3}
+  - {fileID: 7049958432318626308, guid: 018fad4d78061594da23f93264956e3c, type: 3}
+  - {fileID: 4200338313373513880, guid: 9c3bacef019e3614c9b964d9d342f407, type: 3}
+  - {fileID: 4970244592215488618, guid: 358cc1f713ea59147998cc3cdf2dbc67, type: 3}
+  player: {fileID: 726895925}
+  spawnAreaAtStart: 2
+  distanceToNext: 30
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -507,3 +563,4 @@ SceneRoots:
   - {fileID: 519420032}
   - {fileID: 619394802}
   - {fileID: 726895925}
+  - {fileID: 1955891980}
