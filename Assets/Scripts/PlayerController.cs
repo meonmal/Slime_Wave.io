@@ -23,4 +23,19 @@ public class PlayerController : MonoBehaviour
             movement.MoveToY();
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Item"))
+        {
+            Debug.Log("점수 추가");
+
+            // 충돌한 게임 오브젝트(점수 아이템) 삭제
+            Destroy(collision.gameObject);
+        }
+        else if (collision.CompareTag("Obstacle"))
+        {
+            Debug.Log("게임 오버");
+        }
+    }
 }
