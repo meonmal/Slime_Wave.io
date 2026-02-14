@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField]
+    private StageController stageController;
     // 플레이어 이동 제어를 위한 Movement2D
     private Movement2D movement;
 
@@ -13,6 +15,12 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        // 플레이어가 사망한 상태에서는 조작 불가능
+        if(stageController.IsGameOver == true)
+        {
+            return;
+        }
+
         // x축 이동
         movement.MoveToX();
 
@@ -28,14 +36,18 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.CompareTag("Item"))
         {
-            Debug.Log("점수 추가");
+            // 아이템 획득으로 점수 +1
+            stageController.IncreaseScore(1);
 
             // 충돌한 게임 오브젝트(점수 아이템) 삭제
             Destroy(collision.gameObject);
         }
         else if (collision.CompareTag("Obstacle"))
         {
-            Debug.Log("게임 오버");
+            // 플레이어가 장애물과 충돌해 사망하면 물리 효과를 받지 않도록 하기 위해 Rigidbody2D 컴포넌트 삭제
+            Destroy(GetComponent<Rigidbody2D>());
+
+            stageController.GameOver();
         }
     }
 }
