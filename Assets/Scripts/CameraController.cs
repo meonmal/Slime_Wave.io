@@ -9,6 +9,13 @@ public class CameraController : MonoBehaviour
     [SerializeField]
     private float smoothTime = 0.3f;               // 부드럽게 이동하는 시간
     private Vector3 velocity = Vector3.zero;      // 값의 변화량(= 현재 속도)
+    // 배경 색상 변경을 위한 Camera
+    private Camera mainCamera;
+
+    private void Awake()
+    {
+        mainCamera = GetComponent<Camera>();
+    }
 
     private void FixedUpdate()
     {
@@ -19,5 +26,13 @@ public class CameraController : MonoBehaviour
 
         // 목표 위치까지 부드럽게 이동할 때 사용하는 메소드
         transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
+    }
+
+    public void ChangeBackgroundColor()
+    {
+        // 0.1 단위로 0.0 ~ 1.0 사이의 값 중 임의의 값 선택
+        float colorHue = Random.Range(0, 10);
+        colorHue *= 0.1f;
+        mainCamera.backgroundColor = Color.HSVToRGB(colorHue, 0.6f, 0.8f);
     }
 }

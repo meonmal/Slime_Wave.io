@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 public class StageController : MonoBehaviour
 {
     [SerializeField]
+    private CameraController cameraController;
+    [SerializeField]
     private GameObject panelGameStart;
     [SerializeField]
     private GameObject panelGameOver;
@@ -17,6 +19,8 @@ public class StageController : MonoBehaviour
     private TextMeshProUGUI textBestScore;
 
     private int currentScore = 0;
+    // 게임 오버 지연 시간
+    private float gameOverDelayTime = 1f;
 
     public bool IsGameOver { private set; get; } = false;
 
@@ -54,9 +58,17 @@ public class StageController : MonoBehaviour
     {
         IsGameOver = true;
 
+        StartCoroutine(nameof(OnGameOver));
+    }
+
+    private IEnumerator OnGameOver()
+    {
+        // 플레이어 사망 효과 재생 후 게임오버 처리 및 버튼이 출력되도록 한다.
+        yield return new WaitForSeconds(gameOverDelayTime);
+
         // 디바이스에 "BestScore" 키로 저장 되어 있는 최고 점수 데이터를 불러온다.
         int bestScore = PlayerPrefs.GetInt(Constants.BestScore);
-        if(currentScore > bestScore)
+        if (currentScore > bestScore)
         {
             PlayerPrefs.SetInt(Constants.BestScore, currentScore);
             textBestScore.text = $"<size=50>BEST</size>\n<size=100>{currentScore}</size>";
@@ -71,6 +83,8 @@ public class StageController : MonoBehaviour
         currentScore += score;
         // 현재 점수를 텍스트 UI에 출력
         textCurrentScore.text = currentScore.ToString();
+        // 배경 색상 변경
+        cameraController.ChangeBackgroundColor();
     }
 
     public void ContinueGame()

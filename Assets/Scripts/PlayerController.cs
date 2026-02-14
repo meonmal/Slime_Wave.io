@@ -4,6 +4,11 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField]
     private StageController stageController;
+    [SerializeField]
+    private ShakeCamera shakeCamera;
+    // 플레이어 사망 효과
+    [SerializeField]
+    private GameObject playerDieEffect;
     // 플레이어 이동 제어를 위한 Movement2D
     private Movement2D movement;
 
@@ -40,10 +45,14 @@ public class PlayerController : MonoBehaviour
             stageController.IncreaseScore(1);
 
             // 충돌한 게임 오브젝트(점수 아이템) 삭제
-            Destroy(collision.gameObject);
+            collision.GetComponent<Item>().Exit();
         }
         else if (collision.CompareTag("Obstacle"))
         {
+            shakeCamera.OnShakeCamera(0.5f, 0.1f);
+            // 플레이어 사망 효과 재생
+            Instantiate(playerDieEffect, transform.position, Quaternion.identity);
+
             // 플레이어가 장애물과 충돌해 사망하면 물리 효과를 받지 않도록 하기 위해 Rigidbody2D 컴포넌트 삭제
             Destroy(GetComponent<Rigidbody2D>());
 
